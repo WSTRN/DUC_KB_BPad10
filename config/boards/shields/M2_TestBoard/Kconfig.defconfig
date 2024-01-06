@@ -1,0 +1,54 @@
+if SHIELD_BPAD10
+
+config ZMK_KEYBOARD_NAME
+    default "BPad10"
+
+#config ZMK_SLEEP
+	#default n
+endif
+
+CONFIG_PINCTRL=y
+CONFIG_BUILD_OUTPUT_UF2=y
+CONFIG_ZMK_RGB_UNDERGLOW=y
+# Use the STRIP config specific to the LEDs you're using
+CONFIG_WS2812_STRIP=y
+
+if ZMK_DISPLAY
+# config I2C
+# 	default y
+# config SSD1306
+# 	default y
+
+# config SSD1306_REVERSE_MODE
+# 	default y
+
+config LPM009M360A
+	default y
+
+endif # ZMK_DISPLAY
+
+if LVGL
+config ZMK_DISPLAY_DEDICATED_THREAD_STACK_SIZE
+	default 8192
+
+#config LV_HOR_RES_MAX
+	#default 128
+#config LV_VER_RES_MAX
+	#default 32
+config LV_Z_VDB_SIZE
+	default 64
+
+config LV_DPI_DEF
+	default 148
+config LV_Z_BITS_PER_PIXEL
+	default 1
+choice LV_COLOR_DEPTH
+	default LV_COLOR_DEPTH_1
+endchoice
+
+endif # LVGL
+
+config ZMK_WIDGET_WPM_STATUS
+	default y
+
+

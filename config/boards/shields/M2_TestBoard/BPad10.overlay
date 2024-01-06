@@ -1,0 +1,37 @@
+#include "BPad10.dtsi"
+
+&left_encoder {
+    status = "okay";
+};
+
+&spi2 {
+	cs-gpios = <&gpio0 31 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+	status = "okay";
+	lcd0: lcd@0 {
+		compatible = "jdi,lpm009m360a";
+		reg = <0>;
+		status = "okay";
+		spi-max-frequency = <4000000>;
+		disp_gpios = <&gpio0 29 GPIO_ACTIVE_HIGH>;
+		extcomin_gpios = <&gpio0 28 GPIO_ACTIVE_HIGH>;
+		width = <72>;
+		height = <144>;
+        color_mode = [02];
+	};
+};
+    
+&uart0 {
+	compatible = "nordic,nrf-uarte";
+	status = "okay";
+	current-speed = <115200>;
+	pinctrl-0 = <&uart0_default>;
+	pinctrl-1 = <&uart0_sleep>;
+	pinctrl-names = "default", "sleep";
+};
+
+// &usbd {
+//     status = "okay";
+//     cdc_acm_uart: cdc_acm_uart {
+//         compatible = "zephyr,cdc-acm-uart";
+//     };
+// };
