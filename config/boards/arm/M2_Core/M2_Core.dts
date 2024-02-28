@@ -18,9 +18,10 @@
 		zephyr,sram = &sram0;
 		zephyr,flash = &flash0;
 		zmk,underglow = &led_strip;
+		zmk,battery = &vbat0;
 	};
 
-	vbatt {
+	vbat0:vbatt {
 		compatible = "zmk,battery-voltage-divider";
 		label = "BATTERY";
 		io-channels = <&adc 1>;

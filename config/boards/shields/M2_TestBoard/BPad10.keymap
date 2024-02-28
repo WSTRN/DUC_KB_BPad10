@@ -6,8 +6,13 @@
 #include <dt-bindings/zmk/ext_power.h>
 
 #define DEF 0
-#define RGB 1
+#define ADJ 1
 #define SET 2
+#define RGB 3
+
+&lt {
+    tapping-term-ms = <500>;
+};
 
 / {
     keymap {
@@ -15,30 +20,82 @@
 
         default_layer {
 bindings = <
-			  		&kp KP_N7 &kp KP_N8 &lt SET KP_N9 
-			  		&kp KP_N4 &kp KP_N5 &kp KP_N6 
-	&lt RGB KP_N0   &kp KP_N1 &kp KP_N2 &kp KP_N3
+	&kp KP_N7 &kp KP_N8     &kp KP_N9 
+	&kp KP_N4 &lt ADJ KP_N5 &kp KP_N6 
+	&kp KP_N1 &kp KP_N2     &kp KP_N3
+					        &kp KP_N0
 >;
 sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
-        };
+        }; 
 
-        rgb_layer {
+		adjust_layer {
 bindings = <
-			&rgb_ug RGB_HUI &rgb_ug RGB_SAD &rgb_ug RGB_SPI 
-			&rgb_ug RGB_HUD &rgb_ug RGB_BRI &rgb_ug RGB_SPD 
-	&none   &rgb_ug RGB_SAI &rgb_ug RGB_BRD &rgb_ug RGB_EFF
+	&none			&none		   	&sl RGB 
+	&none      		&none       	&none 
+	&none      		&none       	&none
+									&sl SET
 >;
 sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
         };
 
 		setting_layer {
 bindings = <
-			  		&bootloader   &bt BT_CLR   &none 
-			  		&sys_reset    &out OUT_TOG &none 
-	&rgb_ug RGB_TOG &bt BT_SEL 0  &bt BT_SEL 1 &bt BT_SEL 2
+	&bootloader     &out OUT_TOG	&bt BT_CLR 
+	&sys_reset      &none			&none 
+	&bt BT_SEL 0    &bt BT_SEL 1  	&bt BT_SEL 2
+									&none
 >;
 sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
         };
 
+		rgb_layer {
+bindings = <
+	&rgb_ug RGB_HUI &rgb_ug RGB_SAD &rgb_ug RGB_SPI
+	&rgb_ug RGB_HUD &rgb_ug RGB_BRI &rgb_ug RGB_SPD 
+	&rgb_ug RGB_SAI &rgb_ug RGB_BRD &rgb_ug RGB_EFF
+									&rgb_ug RGB_TOG
+>;
+sensor-bindings = <&inc_dec_kp C_VOL_DN C_VOL_UP>;
+        };
+
+    };
+
+    combos {
+        compatible = "zmk,combos";
+        combo_divide {
+            timeout-ms = <50>;
+            key-positions = <0 1>;
+            bindings = <&kp KP_DIVIDE>;
+        };
+		combo_multiply {
+            timeout-ms = <50>;
+            key-positions = <1 2>;
+            bindings = <&kp KP_MULTIPLY>;
+        };
+		combo_minus {
+            timeout-ms = <50>;
+            key-positions = <2 5>;
+            bindings = <&kp KP_MINUS>;
+        };
+		combo_plus {
+            timeout-ms = <50>;
+            key-positions = <5 8>;
+            bindings = <&kp KP_PLUS>;
+        };
+		combo_dot {
+            timeout-ms = <50>;
+            key-positions = <7 8>;
+            bindings = <&kp KP_DOT>;
+        };
+		combo_enter {
+            timeout-ms = <50>;
+            key-positions = <4 5>;
+            bindings = <&kp KP_ENTER>;
+        };
+		combo_bspc {
+            timeout-ms = <50>;
+            key-positions = <6 7>;
+            bindings = <&kp BSPC>;
+        };
     };
 };
